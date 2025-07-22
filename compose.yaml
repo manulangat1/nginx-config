@@ -1,0 +1,17 @@
+services: 
+  nginx: 
+    image: manulangat/blog_by_langat:nginx-config
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+
+
+networks:
+  webnet:
+    external: true
+    name: webnet
+    
