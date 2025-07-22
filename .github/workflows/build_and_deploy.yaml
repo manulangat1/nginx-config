@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: Build the stack
-        run: docker compose  -f compose.yaml up -d --build
+        run: docker compose  -f compose.dev.yaml up -d --build
 
       - name: Get docker logs
         run: docker ps
@@ -34,7 +34,7 @@ jobs:
           docker compose push
 
       - name: stop containers
-        run: docker compose -f compose.yaml down --volumes
+        run: docker compose -f compose.dev.yaml down --volumes
 
       - name: Executing remote  command and deployment to digital ocean for dev enviroment
         uses: appleboy/ssh-action@master

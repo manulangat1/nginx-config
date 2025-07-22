@@ -1,0 +1,13 @@
+services: 
+  nginx: 
+    image: manulangat/blog_by_langat:nginx-config
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+
+
+
+    
