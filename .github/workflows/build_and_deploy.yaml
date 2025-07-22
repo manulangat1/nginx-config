@@ -7,7 +7,7 @@ on:
   #   branches: [main]
 
 jobs:
-  testing-docker-compose:
+  build_and_deploy_nginx_config:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -44,11 +44,12 @@ jobs:
           PORT: 22
           KEY: ${{ secrets.DO_PRIVATE_KEY}}
           script: |
-            cd jobzyv1/
+            cd nginx/
             docker system prune -af
             docker compose  -f compose.yaml down --volumes
             echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
             docker system prune -af
-            docker compose -f compose.yaml pull
-            docker compose -f compose.yaml  up --build --remove-orphans -d --force-recreate
+            docker compose -f compose.yaml pull nginx 
+            docker compose -f compose.yaml  up --build --remove-orphans -d --force-recreate nginx
+            docker compose -f compose.yaml ps
             # docker-compose -f compose.yaml up  --build  -d
